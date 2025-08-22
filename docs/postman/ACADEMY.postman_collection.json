@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "89c2a61c-6840-45d5-ae22-c1b5a66fd97d",
+		"name": "ACADEMY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26426156"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"ofernandoavila\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/v1/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
