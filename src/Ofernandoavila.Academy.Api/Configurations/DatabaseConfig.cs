@@ -5,11 +5,11 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class DatabaseConfig
     {
-        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+        public static WebApplicationBuilder AddDatabase(this WebApplicationBuilder builder)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
                     npgsqlOptions =>
                     {
                         npgsqlOptions.CommandTimeout(30);
@@ -18,14 +18,14 @@ namespace Ofernandoavila.Academy.API.Configurations
                 );
             });
 
-            return services;
+            return builder;
         }
 
-        public static IApplicationBuilder MigrateDatabase(this IApplicationBuilder app)
+        public static async Task<IApplicationBuilder> MigrateDatabase(this IApplicationBuilder app)
         {
             using var context = GetDbContextService(app);
             context.Database.SetCommandTimeout(TimeSpan.FromMinutes(5));
-            context.Database.Migrate();
+            await context.Database.MigrateAsync();
 
             return app;
         }

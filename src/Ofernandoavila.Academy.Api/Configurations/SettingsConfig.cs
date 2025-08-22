@@ -4,20 +4,13 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class SettingsConfig
     {
-        public static IServiceCollection AddAppSettingsConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static WebApplicationBuilder AddAppSettingsConfiguration(this WebApplicationBuilder builder)
         {
-            var section = configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(section);
+            var configuration = builder.Configuration;
+            builder.Services.Configure<AppSettings>(configuration.GetSection(AppSettings.AppConfig));
+            builder.Services.Configure<AppCredentials>(configuration.GetSection("AppCredentials"));
 
-            return services;
-        }
-
-        public static IServiceCollection AddAppCredentialsSettingsConfiguration(this IServiceCollection services, IConfiguration configuration)
-        {
-            var section = configuration.GetSection("AppCredentials");
-            services.Configure<AppCredentials>(section);
-
-            return services;
+            return builder;
         }
     }
 }

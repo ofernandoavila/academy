@@ -9,4 +9,14 @@ namespace Ofernandoavila.Academy.API.Configurations
 
         }
     }
+
+    public static class AutomapperConfiguration
+    {
+        public static WebApplicationBuilder AddAutomapperConfig(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddAutoMapper(typeof(AutomapperConfig));
+
+            return builder;
+        }
+    }
 }

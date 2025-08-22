@@ -5,9 +5,9 @@ namespace Ofernandoavila.Academy.API.Configurations.Swagger
 {
     public static class SwaggerConfig
     {
-        public static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
+        public static WebApplicationBuilder AddSwaggerConfig(this WebApplicationBuilder builder)
         {
-            services.AddSwaggerGen(c =>
+            builder.Services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<SwaggerDefaultValues>();
 
@@ -37,7 +37,7 @@ namespace Ofernandoavila.Academy.API.Configurations.Swagger
                 });
             });
 
-            return services;
+            return builder;
         }
 
         public static IApplicationBuilder UseSwaggerConfig(this IApplicationBuilder app)

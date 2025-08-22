@@ -11,7 +11,7 @@
     "http": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Debug"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5000"

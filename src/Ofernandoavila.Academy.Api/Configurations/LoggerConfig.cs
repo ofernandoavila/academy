@@ -4,9 +4,9 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class LoggerConfig
     {
-        public static IServiceCollection AddLoggerConfig(this IServiceCollection services, IConfiguration configuration)
+        public static WebApplicationBuilder AddLoggerConfig(this WebApplicationBuilder builder)
         {
-            services.AddHttpLogging(logging =>
+            builder.Services.AddHttpLogging(logging =>
             {
                 logging.LoggingFields = HttpLoggingFields.RequestBody |
                                         HttpLoggingFields.RequestQuery |
@@ -18,14 +18,14 @@ namespace Ofernandoavila.Academy.API.Configurations
                 logging.ResponseBodyLogLimit = 4096;
             });
 
-            services.AddHttpContextAccessor();
+            builder.Services.AddHttpContextAccessor();
 
-            services.AddHealthChecks();
+            builder.Services.AddHealthChecks();
 
-            services.AddHealthChecksUI()
+            builder.Services.AddHealthChecksUI()
                     .AddInMemoryStorage();
 
-            return services;
+            return builder;
         }
 
         public static IApplicationBuilder UseLoggerConfiguration(this IApplicationBuilder app)

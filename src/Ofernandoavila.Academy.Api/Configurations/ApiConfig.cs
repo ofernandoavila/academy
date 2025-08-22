@@ -8,25 +8,25 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class ApiConfig
     {
-        public static IServiceCollection ApiBehaviorConfig(this IServiceCollection services)
+        public static WebApplicationBuilder ApiBehaviorConfig(this WebApplicationBuilder builder)
         {
-            services.Configure<ApiBehaviorOptions>(options =>
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddControllers()
+            builder.Services.AddControllers()
                     .AddNewtonsoftJson(options =>
                     {
                         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     });
 
-            return services;
+            return builder;
         }
 
-        public static IServiceCollection ApiVersioningConfig(this IServiceCollection services)
+        public static WebApplicationBuilder ApiVersioningConfig(this WebApplicationBuilder builder)
         {
-            services.AddApiVersioning(options =>
+            builder.Services.AddApiVersioning(options =>
             {
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -40,12 +40,12 @@ namespace Ofernandoavila.Academy.API.Configurations
                 options.SubstituteApiVersionInUrl = true;
             });
 
-            return services;
+            return builder;
         }
 
-        public static IServiceCollection ApiCorsConfig(this IServiceCollection services)
+        public static WebApplicationBuilder ApiCorsConfig(this WebApplicationBuilder builder)
         {
-            services.AddCors(options =>
+            builder.Services.AddCors(options =>
             {
                 options.AddPolicy("Default", buider => buider.AllowAnyOrigin()
                                                              .AllowAnyMethod()
@@ -56,7 +56,13 @@ namespace Ofernandoavila.Academy.API.Configurations
                                                                   .AllowAnyMethod());
             });
 
-            return services;
+            return builder;
+        }
+        public static WebApplicationBuilder AddApiExplorer(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddEndpointsApiExplorer();
+
+            return builder;
         }
 
         public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)

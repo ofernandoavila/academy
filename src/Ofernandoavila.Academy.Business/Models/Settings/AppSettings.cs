@@ -2,6 +2,7 @@
 {
     public class AppSettings
     {
+        public const string AppConfig = "AppSettings";
         public int TokenExpirationInMinutes { get; set; }
         public int RefreshTokenExpirationInMinutes { get; set; }
         public string Secret { get; set; }

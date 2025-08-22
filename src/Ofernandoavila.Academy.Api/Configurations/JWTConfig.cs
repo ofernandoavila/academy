@@ -7,12 +7,12 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class JWTConfig
     {
-        public static IServiceCollection AddJWTConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static WebApplicationBuilder AddJWTConfiguration(this WebApplicationBuilder builder)
         {
-            var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+            var appSettings = builder.Configuration.GetSection(AppSettings.AppConfig).Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
-            services.AddAuthentication(t =>
+            builder.Services.AddAuthentication(t =>
             {
                 t.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 t.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,7 +32,7 @@ namespace Ofernandoavila.Academy.API.Configurations
                   };
               });
 
-            return services;
+            return builder;
         }
     }
 }

@@ -25,6 +25,6 @@ public class RoleMapping : IEntityTypeConfiguration<Role>
                 .HasDatabaseName("IX_DESCRIPTION_TB_ROLE")
                 .IsUnique();
 
-        builder.ToTable("TB_ROLE");
+        builder.ToTable("Roles");
     }
 }

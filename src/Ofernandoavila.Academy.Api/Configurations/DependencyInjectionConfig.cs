@@ -9,15 +9,15 @@ namespace Ofernandoavila.Academy.API.Configurations
 {
     public static class DependencyInjectionConfig
     {
-        public static IServiceCollection ResolveDependencies(this IServiceCollection services)
+        public static WebApplicationBuilder ResolveDependencies(this WebApplicationBuilder builder)
         {
-            services.AddMemoryCache();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<AppDbContext>();
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            services.AddScoped<INotificator, Notificator>();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped<AppDbContext>();
+            builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            builder.Services.AddScoped<INotificator, Notificator>();
 
-            return services;
+            return builder;
         }
     }
 }
